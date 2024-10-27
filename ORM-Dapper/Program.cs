@@ -35,6 +35,19 @@ namespace ORM_Dapper
             var newDepartment = new Department { Name = "Human Resources" };
             departmentRepo.InsertDepartment(newDepartment);
             Console.WriteLine("New department inserted.");
+
+                        // Create an instance of DapperProductRepository
+            IProductRepository productRepo = new DapperProductRepository(conn);
+
+            // Example: Retrieve all products and display them
+            IEnumerable<Product> products = productRepo.GetAllProducts();
+            foreach (var product in products)
+            {
+                Console.WriteLine($"Product ID: {product.ProductID}, Name: {product.Name}, Price: {product.Price}, Category ID: {product.CategoryID}");
+            }
+
+            // Example: Create a new product
+            productRepo.CreateProduct("New Product", 19.99, 1);
         }
     }
 }
